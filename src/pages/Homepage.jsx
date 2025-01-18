@@ -1,0 +1,19 @@
+import { Link } from "react-router-dom"
+import PageNav from "../components/PageNav"
+function Homepage(){
+    return(
+        <main className="homepage h-[70rem]">
+            <PageNav/>
+            <section className="flex flex-col text-center gap-10 items-center p-64 mt-8">
+                <h1 className="text-7xl font-bold">You travel the World.
+                <br/>WorldWise keeps track of your adventures.
+                </h1>
+                <h2 className="text-3xl">A world map that tracks your footsteps into every city you can think of.
+                    Never forget your wonderful experiences and show your friends how you have wandered the world.
+                </h2>
+                <Link to='/app' className="text-2xl text-black bg-green-500 p-4 rounded-full">START TRACKING NOW</Link>
+            </section>
+        </main>
+    )
+}
+export default Homepage
