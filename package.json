@@ -7,11 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server --watch data/cities.json --port 8000"
   },
   "dependencies": {
+    "@fontsource/noto-color-emoji": "^5.1.1",
+    "json-server": "^1.0.0-beta.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "twemoji": "^14.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
