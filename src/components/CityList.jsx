@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import {Context} from '../App'
 import Loader from "./Loader";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const formatDate = (date) =>
     new Intl.DateTimeFormat("en", {
@@ -10,10 +10,28 @@ const formatDate = (date) =>
       year: "numeric",
     }).format(new Date(date));
 
+    
 function CityList()
 {
-    const {cities,isLoading} = useContext(Context);
+    const {cities,isLoading,setCities} = useContext(Context);
+    const navigate = useNavigate();
 
+    async function handleClick(e,id)
+    {
+        e.preventDefault();
+        try {
+            // Save the new city to json-server
+            await fetch(`http://localhost:8000/cities/${id}`, {
+            method: "DELETE",
+            });
+        
+            setCities((prevCities) => prevCities.filter(city=>city.id!==id));
+          } catch (error) {
+            console.error(error.message);
+          } finally {
+            navigate("/app/cities");
+          }
+        }
     if(isLoading)
         return <Loader/>
     return(
@@ -27,7 +45,8 @@ function CityList()
                 </div>
                 <div className="flex gap-3">
                     <p>({formatDate(city.date)})</p>
-                    <button className="bg-black rounded-full h-8 place-content-center w-6">x</button>
+                    <button className="bg-black rounded-full h-8 place-content-center w-6 hover:bg-orange-400"
+                    onClick={(e)=>handleClick(e,city.id)}>x</button>
                 </div>
             </li>
            </NavLink>)}
