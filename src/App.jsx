@@ -12,9 +12,12 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import City from './components/City'
 import Form from './components/Form'
+import { createContext } from 'react'
+
+export const Context = createContext()
 
 function App() {
-
+  
   const [cities,setCities] = useState([])
   const [isLoading,setisLoading]=useState(false);
 
@@ -36,7 +39,8 @@ function App() {
   },[])
 
   return (
-    <BrowserRouter>
+    <Context.Provider value={{cities,isLoading,setisLoading,setCities}}>
+      <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="product" element={<Product/>}/>
@@ -45,15 +49,16 @@ function App() {
         <Route path="app" element={<AppLayout/>}>
           <Route index element={<Navigate replace to="cities"/>}/> {/* This route is always nested with app if no other route is nested, default hai ye. And therefore, Navigate component by React acts as a redirect which in this case navigates to cities path, and hence displaying the citylist by default*/}
           {/** Replace word is important above */}
-          <Route path="cities" element={<CityList cities={cities} isloading={isLoading}/>}/>
+          <Route path="cities" element={<CityList/>}/>
           <Route path="cities/:id" element={<City/>}/>
-          <Route path="countries" element={<CountryList cities={cities} isloading={isLoading}/>}/>
+          <Route path="countries" element={<CountryList/>}/>
           <Route path="form" element={<Form/>}/>
         </Route>
         <Route path="*" element={<PageNotFound/>}/>
         {/* give path="*" and then a corresponding element which is selected when none of the above paths match */}
       </Routes>
     </BrowserRouter>
+    </Context.Provider>
   )
 }
 
