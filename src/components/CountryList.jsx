@@ -1,7 +1,10 @@
-/* eslint-disable react/prop-types */
-function CountryList({cities,isloading})
-{
+import { useContext } from "react";
+import { Context } from "../App";
 
+/* eslint-disable react/prop-types */
+function CountryList()
+{
+    const {cities,isLoading} = useContext(Context);
     const countries = cities.reduce((accumulator, currentCity) => {
         if (!accumulator.some(el => el.country === currentCity.country)) {
             accumulator.push({ country: currentCity.country, emoji: currentCity.emoji });
@@ -10,7 +13,7 @@ function CountryList({cities,isloading})
     }, []);
     
 
-    if(isloading)
+    if(isLoading)
         return <Loader/>
     return(
         <ul className="grid mt-10 grid-cols-3 gap-6">

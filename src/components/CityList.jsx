@@ -1,4 +1,8 @@
-/* eslint-disable react/prop-types */
+import { useContext } from "react";
+import {Context} from '../App'
+import Loader from "./Loader";
+import { NavLink } from "react-router-dom";
+
 const formatDate = (date) =>
     new Intl.DateTimeFormat("en", {
       day: "numeric",
@@ -6,11 +10,11 @@ const formatDate = (date) =>
       year: "numeric",
     }).format(new Date(date));
 
-import { NavLink } from "react-router-dom";
-function CityList({cities,isloading})
+function CityList()
 {
+    const {cities,isLoading} = useContext(Context);
 
-    if(isloading)
+    if(isLoading)
         return <Loader/>
     return(
         <ul className="grid mt-10">
@@ -31,12 +35,5 @@ function CityList({cities,isloading})
     )
 }
 
-function Loader()
-{
-    return(
-        <div className="h-full flex items-center justify-center">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-r from-transparent to-gray-400 mask-radial animate-spin"></div>
-        </div>
-    )
-}
+
 export default CityList
