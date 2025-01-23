@@ -21,7 +21,9 @@ function Map()
         getPosition,
       } = useGeoLocation();
 
-      const{mapLat,mapLong} = useUrlPosition()
+      const [mapLat,mapLong] = useUrlPosition()
+      console.log(mapLat+" "+mapLong);
+      
 
       useEffect(
         function () {
@@ -63,7 +65,7 @@ function Map()
 
 function ChangeCenter({position}){
     const map = useMap();
-    map.setView(position);
+    map.setView(position,map.getZoom());
     return null; // return is necessary since it is a component but is not needed in our requirement so null.
 }
 
