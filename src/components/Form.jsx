@@ -20,7 +20,7 @@ function Form() {
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [notes, setNotes] = useState("");
-  const {lat,lng} = useUrlPosition(); 
+  const [lat,lng] = useUrlPosition(); 
   const [emoji, setEmoji] = useState("");
   const {setCities}=useContext(Context);
 

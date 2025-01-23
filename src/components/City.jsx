@@ -36,7 +36,6 @@ function City()
                 setisLoading(true);
                 const res = await fetch(`http://localhost:8000/cities/${id}`);
                 const data = await res.json();
-                console.log(data);
                 
                 setCurrCity(data);
             } catch {
