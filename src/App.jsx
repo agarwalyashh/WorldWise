@@ -13,6 +13,8 @@ import { useEffect } from 'react'
 import City from './components/City'
 import Form from './components/Form'
 import { createContext } from 'react'
+import { AuthProvider } from './contexts/FakeAuthentication'
+import ProtectedRoute from './components/ProtectedRoute'
 
 export const Context = createContext()
 
@@ -39,6 +41,7 @@ function App() {
   },[])
 
   return (
+    <AuthProvider>
     <Context.Provider value={{cities,isLoading,setisLoading,setCities}}>
       <BrowserRouter>
       <Routes>
@@ -46,7 +49,11 @@ function App() {
         <Route path="product" element={<Product/>}/>
         <Route path="pricing" element={<Pricing/>}/> 
         <Route path="login" element={<Login/>}/> 
-        <Route path="app" element={<AppLayout/>}>
+        <Route path="app" element={
+          <ProtectedRoute>
+            <AppLayout/>
+          </ProtectedRoute>
+        }>
           <Route index element={<Navigate replace to="cities"/>}/> {/* This route is always nested with app if no other route is nested, default hai ye. And therefore, Navigate component by React acts as a redirect which in this case navigates to cities path, and hence displaying the citylist by default*/}
           {/** Replace word is important above */}
           <Route path="cities" element={<CityList/>}/>
@@ -59,6 +66,7 @@ function App() {
       </Routes>
     </BrowserRouter>
     </Context.Provider>
+    </AuthProvider>
   )
 }
 

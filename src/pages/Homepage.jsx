@@ -11,7 +11,7 @@ function Homepage(){
                 <h2 className="text-3xl">A world map that tracks your footsteps into every city you can think of.
                     Never forget your wonderful experiences and show your friends how you have wandered the world.
                 </h2>
-                <Link to='/app' className="text-2xl text-black bg-green-500 p-4 rounded-full">START TRACKING NOW</Link>
+                <Link to='/login' className="text-2xl text-black bg-green-500 p-4 rounded-full">START TRACKING NOW</Link>
             </section>
         </main>
     )
