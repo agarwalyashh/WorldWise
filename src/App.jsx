@@ -11,7 +11,7 @@ import { AuthProvider } from './contexts/FakeAuthentication'
 import ProtectedRoute from './components/ProtectedRoute'
 import { lazy } from 'react'
 import { Suspense } from 'react'
-import Loader from './components/Loader'
+import FullLoader from './components/Loader'
 
 const Homepage = lazy(()=>import('./pages/Homepage'))
 const Product = lazy(()=>import('./pages/Product'))
@@ -48,7 +48,7 @@ function App() {
     <AuthProvider>
     <Context.Provider value={{cities,isLoading,setisLoading,setCities}}>
       <BrowserRouter>
-      <Suspense fallback={<Loader/>}>
+      <Suspense fallback={<FullLoader/>}>
         <Routes>
           <Route path="/" element={<Homepage/>}/>
           <Route path="product" element={<Product/>}/>
